@@ -1,6 +1,6 @@
-@import 'base/variables';
-@import 'contenido/contenido';
+//Con @use se compilan dichos archivos.
+//@use crea isntancias locales, es decir, solamente tengo acceso a dichos archivos
+//a traves de este archivo app.scss
+@use 'base';
+@use 'contenido';
 
-body{
-    background-color: $rojo;
-}
