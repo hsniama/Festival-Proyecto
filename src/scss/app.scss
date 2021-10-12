@@ -1,5 +1,6 @@
-$bluee: red;
+@import 'base/variables';
+@import 'contenido/contenido';
 
 body{
-    background-color: $bluee;
+    background-color: $rojo;
 }
