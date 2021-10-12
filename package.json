@@ -1,0 +1,26 @@
+{
+  "name": "festival-proyecto",
+  "version": "1.0.0",
+  "description": "Proyecto con Gulp, Sass y HTML",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SebastianNiama/LPage-Festival-de-Musica.git"
+  },
+  "keywords": [
+    "SASS",
+    "GULP"
+  ],
+  "author": "Henry Niama",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SebastianNiama/LPage-Festival-de-Musica/issues"
+  },
+  "homepage": "https://github.com/SebastianNiama/LPage-Festival-de-Musica#readme",
+  "devDependencies": {
+    "sass": "^1.42.1"
+  }
+}
