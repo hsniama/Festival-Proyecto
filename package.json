@@ -22,6 +22,7 @@
   "homepage": "https://github.com/SebastianNiama/LPage-Festival-de-Musica#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
+    "gulp-plumber": "^1.2.1",
     "gulp-sass": "^5.0.0",
     "sass": "^1.42.1"
   }

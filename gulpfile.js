@@ -7,11 +7,15 @@
 //Esto es sintaxis de node.js
 const {src, dest, watch} = require('gulp');//con la API de gulp se puede retornar multiples funciones
 const sass = require('gulp-sass')(require('sass'));//copn gulp-sass solo podemos retornar una funcion.
+const plumber =require('gulp-plumber');
 
 //2. Definicion de tareas:
 function css(done) {
     //1. Se debe identificar el archivo .scss a compilar (Se usa la funcion 'src' de gulp)
     src('src/scss/**/*.scss')//Le pasamos la ubicacion.
+    
+        .pipe(plumber())
+
     //2. Se debe compilarlo (Aqui usamos la siguiente funcion 'sass' de gulp)
         .pipe(sass()) 
     //3. Se debe Almacenarlo en el disco duro. (Se usa la funcion dest de gulp para almacenar)
