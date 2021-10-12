@@ -11,7 +11,7 @@ const sass = require('gulp-sass')(require('sass'));//copn gulp-sass solo podemos
 //2. Definicion de tareas:
 function css(done) {
     //1. Se debe identificar el archivo .scss a compilar (Se usa la funcion 'src' de gulp)
-    src('src/scss/app.scss')//Le pasamos la ubicacion.
+    src('src/scss/**/*.scss')//Le pasamos la ubicacion.
     //2. Se debe compilarlo (Aqui usamos la siguiente funcion 'sass' de gulp)
         .pipe(sass()) 
     //3. Se debe Almacenarlo en el disco duro. (Se usa la funcion dest de gulp para almacenar)
@@ -29,7 +29,7 @@ function dev(done) {
     //La funcion watch toma dos parametros, el primer es el archivo al que voy a escuchar o sea, 
     //al que voy hacer cambios. Y cuando suceda cambios en dicho archivo, llamo a la funcion
     //previamente creada 'css'.
-    watch('src/scss/app.scss', css);
+    watch('src/scss/**/*.scss', css);
     done();
 }
 

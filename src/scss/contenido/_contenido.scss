@@ -1,8 +1,0 @@
-//Con @use accedemos al contenido, lo podemos hacer con un namespace tambien
-//@use 'base/variables';
-@use 'base/variables' as v;
-
-
-h1{
-    color: v.$rojo;
-}
