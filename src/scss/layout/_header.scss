@@ -11,6 +11,11 @@
 }
 
 .navegacion-principal{
+    
+    @include m.telefono {
+        
+    }
+    
     a{
         color: v.$blanco;
         font-size: 2.4rem;
@@ -21,6 +26,3 @@
     }
 }
 
-.prueba{
-    @include m.heading;
-}
