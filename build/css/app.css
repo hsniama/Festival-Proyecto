@@ -481,6 +481,13 @@ img {
 .sobre-festival {
   padding: 5rem 0;
 }
+@media (min-width: 768px) {
+  .sobre-festival {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5rem;
+  }
+}
 
 .contenido-festival {
   display: flex;
