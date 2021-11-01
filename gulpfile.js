@@ -5,9 +5,11 @@
 // 1. Utilizamos las dependencias de desarrollo instaladas en el package.json:
 //(Va a node_modules y extrae la informacion y se guarda en la variable).
 //Esto es sintaxis de node.js
-const {src, dest, watch} = require('gulp');//con la API de gulp se puede retornar multiples funciones
+const {src, dest, watch, parallel} = require('gulp');//con la API de gulp se puede retornar multiples funciones
 const sass = require('gulp-sass')(require('sass'));//copn gulp-sass solo podemos retornar una funcion.
 const plumber =require('gulp-plumber');
+const webp = require('gulp-webp');//Se agrega funcion para convertir imgs a webp
+
 
 //2. Definicion de tareas:
 function css(done) {
@@ -37,8 +39,23 @@ function dev(done) {
     done();
 }
 
+//Funcion para conversion de iamgenes a webp
+function versionWebp(done) {
 
+    const opciones ={
+        quality: 50
+    };
+
+    //Entra de forma recursiva a dicha carpeta y busca los archivos con formatos .png y .jpg
+    src('src/img/**/*.{png,jpg}') //Aqui identificamos las imagenes
+    .pipe(webp(opciones))
+    .pipe(dest('build/img')) //Se detalla el lugar en donde se almacenaran
+
+
+    done();
+}
 
 //3. Se hace disponibles las tareas para su ejecucion:
 exports.css = css;
-exports.dev = dev;
+exports.versionWebp = versionWebp;
+exports.dev = parallel(css, versionWebp, dev);//Con parallel esta tarea ejecuta varias en una sola.
