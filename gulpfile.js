@@ -8,6 +8,9 @@
 const {src, dest, watch, parallel} = require('gulp');//con la API de gulp se puede retornar multiples funciones
 const sass = require('gulp-sass')(require('sass'));//copn gulp-sass solo podemos retornar una funcion.
 const plumber =require('gulp-plumber');
+
+const cache = require('gulp-cache');
+const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');//Se agrega funcion para convertir imgs a webp
 
 
@@ -55,7 +58,25 @@ function versionWebp(done) {
     done();
 }
 
+//Funcion para aligerar imagenes
+function imagenes(done) {
+
+    const opciones = {
+        optimizationLevel: 3
+    };
+    
+    src('src/img/**/*.{png,jpg}') //Aqui identificamos las imagenes
+    .pipe(cache(imagemin(opciones)))
+    .pipe(dest('build/img'))
+
+    done();
+}
+
+
 //3. Se hace disponibles las tareas para su ejecucion:
 exports.css = css;
+
+exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
-exports.dev = parallel(css, versionWebp, dev);//Con parallel esta tarea ejecuta varias en una sola.
+
+exports.dev = parallel(imagenes, versionWebp, dev);//Con parallel esta tarea ejecuta varias en una sola.
