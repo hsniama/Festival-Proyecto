@@ -12,7 +12,7 @@ const plumber =require('gulp-plumber');
 const cache = require('gulp-cache');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');//Se agrega funcion para convertir imgs a webp
-
+const avif = require('gulp-avif');
 
 //2. Definicion de tareas:
 function css(done) {
@@ -58,6 +58,22 @@ function versionWebp(done) {
     done();
 }
 
+//Funcion para conversion de iamgenes a webp
+function versionAvif(done) {
+
+    const opciones ={
+        quality: 50
+    };
+
+    //Entra de forma recursiva a dicha carpeta y busca los archivos con formatos .png y .jpg
+    src('src/img/**/*.{png,jpg}') //Aqui identificamos las imagenes
+    .pipe(avif(opciones))
+    .pipe(dest('build/img')) //Se detalla el lugar en donde se almacenaran
+
+
+    done();
+}
+
 //Funcion para aligerar imagenes
 function imagenes(done) {
 
@@ -78,5 +94,6 @@ exports.css = css;
 
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
+exports.versionAvif = versionAvif;
 
-exports.dev = parallel(imagenes, versionWebp, dev);//Con parallel esta tarea ejecuta varias en una sola.
+exports.dev = parallel(imagenes, versionWebp, versionAvif, dev);//Con parallel esta tarea ejecuta varias en una sola.
