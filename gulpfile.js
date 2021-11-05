@@ -32,16 +32,6 @@ function css(done) {
     done();//para que la tarea finalize.
 }
 
-//Creacion de funcion watch para que lea y guarde los cambios automaticamente
-function dev(done) {
-
-    //La funcion watch toma dos parametros, el primer es el archivo al que voy a escuchar o sea, 
-    //al que voy hacer cambios. Y cuando suceda cambios en dicho archivo, llamo a la funcion
-    //previamente creada 'css'.
-    watch('src/scss/**/*.scss', css);
-    done();
-}
-
 //Funcion para conversion de iamgenes a webp
 function versionWebp(done) {
 
@@ -88,12 +78,30 @@ function imagenes(done) {
     done();
 }
 
+function javascript(done) {
+    src('src/js/**/*.js')
+    .pipe(dest('build/js'));
+
+    done();
+}
+
+//Creacion de funcion watch para que lea y guarde los cambios automaticamente
+function dev(done) {
+
+    //La funcion watch toma dos parametros, el primer es el archivo al que voy a escuchar o sea, 
+    //al que voy hacer cambios. Y cuando suceda cambios en dicho archivo, llamo a la funcion
+    //previamente creada 'css'.
+    watch('src/scss/**/*.scss', css);
+    watch('src/js/**/*.js', javascript);
+    done();
+}
 
 //3. Se hace disponibles las tareas para su ejecucion:
 exports.css = css;
+exports.js = javascript;
 
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
 
-exports.dev = parallel(imagenes, versionWebp, versionAvif, dev);//Con parallel esta tarea ejecuta varias en una sola.
+exports.dev = parallel(imagenes, versionWebp, versionAvif, javascript, dev);//Con parallel esta tarea ejecuta varias en una sola.
