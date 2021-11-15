@@ -18,6 +18,12 @@ body{
     &.fijar-body{
         overflow: hidden;//para no poder dar scroll
     }
+
+    &.body-scroll{
+        padding-top: 8.6rem;//debe ser de 86px xq estamos sacando el header de una posicion fija y debe ser del mismo
+        //tama;o, este valor se lo obtiene en Inspeccionar elemento, es la altura del header. Y evita que se haga un
+        //salto cuando llega al body al hacer scroll.
+    }
 }
 
 p{
