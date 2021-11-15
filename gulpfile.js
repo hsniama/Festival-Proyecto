@@ -9,6 +9,10 @@ const {src, dest, watch, parallel} = require('gulp');//con la API de gulp se pue
 const sass = require('gulp-sass')(require('sass'));//copn gulp-sass solo podemos retornar una funcion.
 const plumber =require('gulp-plumber');
 
+const autoprefixer = require('autoprefixer');//Permite que se ejecute en cualquier navegador
+const cssnano = require('cssnano');//Comprime nuestro codigo de css
+const postcss = require('gulp-postcss');//Hace transformaciones
+
 const cache = require('gulp-cache');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');//Se agrega funcion para convertir imgs a webp
@@ -23,6 +27,9 @@ function css(done) {
 
     //2. Se debe compilarlo (Aqui usamos la siguiente funcion 'sass' de gulp)
         .pipe(sass()) 
+
+        .pipe(postcss([autoprefixer(), cssnano()]))
+
     //3. Se debe Almacenarlo en el disco duro. (Se usa la funcion dest de gulp para almacenar)
         .pipe(dest('build/css'))
 
