@@ -5,6 +5,8 @@
 // 1. Utilizamos las dependencias de desarrollo instaladas en el package.json:
 //(Va a node_modules y extrae la informacion y se guarda en la variable).
 //Esto es sintaxis de node.js
+
+//CSS
 const {src, dest, watch, parallel} = require('gulp');//con la API de gulp se puede retornar multiples funciones
 const sass = require('gulp-sass')(require('sass'));//copn gulp-sass solo podemos retornar una funcion.
 const plumber =require('gulp-plumber');
@@ -13,6 +15,9 @@ const autoprefixer = require('autoprefixer');//Permite que se ejecute en cualqui
 const cssnano = require('cssnano');//Comprime nuestro codigo de css
 const postcss = require('gulp-postcss');//Hace transformaciones
 
+const sourcemaps = require('gulp-sourcemaps');
+
+//Imagenes
 const cache = require('gulp-cache');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');//Se agrega funcion para convertir imgs a webp
@@ -23,12 +28,16 @@ function css(done) {
     //1. Se debe identificar el archivo .scss a compilar (Se usa la funcion 'src' de gulp)
     src('src/scss/**/*.scss')//Le pasamos la ubicacion.
     
+        .pipe(sourcemaps.init())//se iniciliza el sourcemaps
+
         .pipe(plumber())
 
     //2. Se debe compilarlo (Aqui usamos la siguiente funcion 'sass' de gulp)
         .pipe(sass()) 
 
         .pipe(postcss([autoprefixer(), cssnano()]))
+
+        .pipe(sourcemaps.write('.'))//Indicamos donde se guarda, el . es la misma ubicacion de la hoja de estilos
 
     //3. Se debe Almacenarlo en el disco duro. (Se usa la funcion dest de gulp para almacenar)
         .pipe(dest('build/css'))

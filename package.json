@@ -30,6 +30,7 @@
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^9.0.1",
     "gulp-sass": "^5.0.0",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-webp": "^4.0.1",
     "postcss": "^8.3.11",
     "sass": "^1.42.1"
