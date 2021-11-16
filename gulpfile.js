@@ -23,6 +23,10 @@ const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');//Se agrega funcion para convertir imgs a webp
 const avif = require('gulp-avif');
 
+//JavaScript
+const terser = require('gulp-terser-js');
+
+
 //2. Definicion de tareas:
 function css(done) {
     //1. Se debe identificar el archivo .scss a compilar (Se usa la funcion 'src' de gulp)
@@ -96,6 +100,9 @@ function imagenes(done) {
 
 function javascript(done) {
     src('src/js/**/*.js')
+    .pipe(sourcemaps.init())
+    .pipe(terser())
+    .pipe(sourcemaps.write('.'))
     .pipe(dest('build/js'));
 
     done();
